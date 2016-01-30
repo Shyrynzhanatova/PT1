@@ -12,6 +12,8 @@ namespace Lab1
         {
             Console.WriteLine("Hello World");
             Console.ReadKey();
+            //hello world program
+            /*hello world program */
         }
     }
 }
