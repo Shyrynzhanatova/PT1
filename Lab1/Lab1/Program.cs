@@ -6,36 +6,34 @@ using System.Threading.Tasks;
 
 namespace Lab1
 {
-    class Complex
+    class Student 
     {
-        public int a, b; // комплексное число
-        public Complex (int a, int b)
+        public string name; // комплексное число
+        public string surname;
+        public double gpa;
+
+        public Student (string _name, string _surname, double _gpa)
         {
-            this.a = a;//передаем параметры
-            this.b = b;
+            this.name = _name;//передаем параметры
+            this.surname = _surname;
+            this.gpa = _gpa;
         }
-        public static Complex operator +(Complex c1, Complex c2) //суммирование с оператором +
+       
+        public override string ToString()// метод конструктор для принятия начального значения
         {
-            Complex sum = new Complex(c1.a + c2.a, c2.b + c2.b); //само число
-            return sum;
-        }
-        public override string ToString()// с базовой билиотеки переводим в наш комплекс
-        {
-            return a + "/" + b;//возвращаем
+            return name + " " + surname + " " + gpa;//возвращаем данные(имя, фамилию и джипиэй)
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            int n1, n2, n3, n4; //создаем переменные 
-            n1 = Int32.Parse(Console.ReadLine());
-            n2 = Int32.Parse(Console.ReadLine());
-            n3 = Int32.Parse(Console.ReadLine());
-            n4 = Int32.Parse(Console.ReadLine());
-            Complex first_complex = new Complex(n1, n2);//передаем переменные классу
-            Complex second_complex = new Complex(n1, n2);
-            Complex sum = first_complex + second_complex;//вызываем оператор +
+            string name = Console.ReadLine();
+            string surname = Console.ReadLine();
+            Double gpa = Convert.ToDouble(Console.ReadLine());// стринг ту дабл
+            Student inf = new Student(name, surname, gpa);
+            Console.WriteLine(inf);
+            Console.ReadKey();
         }
     }
 }
