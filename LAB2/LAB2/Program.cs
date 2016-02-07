@@ -11,14 +11,17 @@ namespace LAB2
     {
         static void Main(string[] args)
         {
-            FileInfo file = new FileInfo("C:\\Users\\Shyryn\\Desktop");
-            if (file.Exists)
+            int a = int.Parse(Console.ReadLine());
+            int b = int.Parse(Console.ReadLine());
+
+            try
             {
-                Console.WriteLine("File name {0}, file fullname {1}", file.Name, file.FullName);
+                int c = a / b;
+                Console.WriteLine(c);
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine("error");
+                Console.WriteLine(e.Message);
             }
             Console.ReadKey();
         }
