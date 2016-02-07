@@ -11,37 +11,40 @@ namespace LAB2
     {
         static void Main(string[] args)
         {
-            FileStream f1 = new FileStream(@"C:\Users\Shyryn\Desktop\Shyrynin", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            FileStream f2 = new FileStream(@"C:\Users\Shyryn\Desktop\Shyrynout", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
+            FileStream f1 = new FileStream(@"C:\Users\Shyryn\Desktop\input.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            FileStream f2 = new FileStream(@"C:\Users\Shyryn\Desktop\output.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
             StreamReader sr = new StreamReader(f1);
             StreamWriter sw = new StreamWriter(f2);
 
             string[] s = sr.ReadLine().Split();
-            long min, max;
-            min = long.Parse(s[0]);
-            max = long.Parse(s[0]);
+            int a;
+            List<int> primes = new List<int>();
 
-            for (int i = 1; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
-                long a = long.Parse(s[i]);
+                a = int.Parse(s[i]);
+                int cnt = 0;
 
-                if (min >= a)
+                for (int j = 1; j <= a; j++)
                 {
-                    min = a;
+                    if (a % j == 0)
+                    {
+                        cnt++;
+                    }
                 }
-                if (max <= a)
+                if (cnt < 3)
                 {
-                    max = a;
+                    primes.Add(a);
                 }
             }
-            Console.WriteLine("min = {0}, max = {1}", min, max);
-
-
+     
+            sw.WriteLine("Min prime number = {0}", primes.Min()); 
+            
             sr.Close();
             sw.Close();
-            f1.Close();
             f2.Close();
+            f1.Close();
+
             Console.ReadKey();
         }
     }
