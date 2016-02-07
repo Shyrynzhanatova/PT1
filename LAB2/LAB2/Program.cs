@@ -9,29 +9,28 @@ namespace LAB2
 {
     class Program
     {
-        public static void WalkDirectoryTree(DirectoryInfo d, int depth)
+        public static void DirectoryTree(string path)
         {
-            try
+            Stack<string> st = new Stack<string>();
+            Console.WriteLine(path + ":" + Directory.GetFiles(path).Length);
+            st.Push(path);
+
+            while (st.Count > 0)
             {
-                foreach (FileInfo file in d.GetFiles())
+                string[] subdirs = Directory.GetDirectories(st.Pop());
+                foreach (string s in subdirs)
                 {
-                    Console.WriteLine("Depth={0}, File={1}", depth, file.Name);
+                    Console.WriteLine(path + ":" + Directory.GetFiles(s).Length);
+                    st.Push(s);
+                    Console.ReadKey();
                 }
-                foreach (DirectoryInfo di in d.GetDirectories())
-                {
-                    Console.WriteLine("Depth={0}, File={1}", depth, di.Name);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
             }
         }
         static void Main(string[] args)
         {
-            DirectoryInfo d = new DirectoryInfo(@"c:\windows");
-            WalkDirectoryTree(d, 0);
-            Console.ReadKey();
+            DirectoryTree(@"C:\Users\Shyryn\Desktop\Олжик");
         }
     }
 }
+
+
