@@ -9,26 +9,40 @@ namespace LAB2
 {
     class Program
     {
-        public static void DirectoryTree(string path)
-        {
-            Stack<string> st = new Stack<string>();
-            Console.WriteLine(path + ":" + Directory.GetFiles(path).Length);
-            st.Push(path);
-
-            while (st.Count > 0)
-            {
-                string[] subdirs = Directory.GetDirectories(st.Pop());
-                foreach (string s in subdirs)
-                {
-                    Console.WriteLine(path + ":" + Directory.GetFiles(s).Length);
-                    st.Push(s);
-                    Console.ReadKey();
-                }
-            }
-        }
         static void Main(string[] args)
         {
-            DirectoryTree(@"C:\Users\Shyryn\Desktop\Олжик");
+            FileStream f1 = new FileStream(@"C:\Users\Shyryn\Desktop\Shyrynin", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            FileStream f2 = new FileStream(@"C:\Users\Shyryn\Desktop\Shyrynout", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+            StreamReader sr = new StreamReader(f1);
+            StreamWriter sw = new StreamWriter(f2);
+
+            string[] s = sr.ReadLine().Split();
+            long min, max;
+            min = long.Parse(s[0]);
+            max = long.Parse(s[0]);
+
+            for (int i = 1; i < s.Length; i++)
+            {
+                long a = long.Parse(s[i]);
+
+                if (min >= a)
+                {
+                    min = a;
+                }
+                if (max <= a)
+                {
+                    max = a;
+                }
+            }
+            Console.WriteLine("min = {0}, max = {1}", min, max);
+
+
+            sr.Close();
+            sw.Close();
+            f1.Close();
+            f2.Close();
+            Console.ReadKey();
         }
     }
 }
